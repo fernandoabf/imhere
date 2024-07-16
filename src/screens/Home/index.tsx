@@ -27,13 +27,14 @@ export default function Home() {
         var nameOfMonthNow = monthNames[new Date().getMonth()];
         var yearNow = new Date().getFullYear();
         setCurrentDate(
-            dayNow + ', ' + dateNow + ' de ' + nameOfMonthNow + ' de ' + yearNow 
+            dayNow + ', ' + dateNow + ' de ' + nameOfMonthNow + ' de ' + yearNow
         );
     });
 
     const handleParticipantAdd = () => {
         if (participants.includes(newParticipant)) {
             Alert.alert('Esse participante já foi adicionado')
+            
         }
         else {
             setParticipants([...participants, newParticipant])
@@ -41,8 +42,8 @@ export default function Home() {
         }
     }
 
-    const handleParticipantRemove = (item: string) => {
-        setParticipants(participants.filter(participant => participant !== item))
+    const handleParticipantRemove = (name: string) => {
+        setParticipants(oldParticipants => oldParticipants.filter(participant => participant !== name))
     }
 
     return (
