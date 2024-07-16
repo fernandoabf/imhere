@@ -1,16 +1,35 @@
 import { Alert, FlatList, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { styles } from './styles'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Participant } from '../../components/Participant'
-
-
 
 export default function Home() {
 
     const [participants, setParticipants] = useState<string[]>([])
     const [newParticipant, setNewParticipant] = useState('')
+    const [currentDate, setCurrentDate] = useState('');
 
+    const monthNames = [
+        "Janeiro", "Fevereiro", "Março",
+        "Abril", "Maio", "Junho", "Julho",
+        "Agosto", "Setembro", "Outubro",
+        "Novembro", "Dezembro"
+    ];
+    const dayNames = [
+        "Domingo", "Segunda-feira", "Terça-feira",
+        "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"
+    ];
+
+    useEffect(() => {
+        var dayNow = dayNames[new Date().getDay()]
+        var dateNow = new Date().getDate();
+        var nameOfMonthNow = monthNames[new Date().getMonth()];
+        var yearNow = new Date().getFullYear();
+        setCurrentDate(
+            dayNow + ', ' + dateNow + ' de ' + nameOfMonthNow + ' de ' + yearNow 
+        );
+    });
 
     const handleParticipantAdd = () => {
         if (participants.includes(newParticipant)) {
@@ -33,7 +52,7 @@ export default function Home() {
             </Text>
 
             <Text style={styles.eventDate}>
-                Sexta, 12 de Julho de 2024.
+                {currentDate}
             </Text>
 
             <View style={styles.form}>
